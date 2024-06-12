@@ -1,14 +1,10 @@
 package com.HealthApp.HealthApp.Patient;
 
-import lombok.Generated;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,7 +12,7 @@ import java.time.LocalDateTime;
 @Document("Patient")
 public class PatientEntity {
     @Id
-    private ObjectId id;
+    private String id;
     private  String firstName;
     private  String lastName;
     private  String dateOfBirth;

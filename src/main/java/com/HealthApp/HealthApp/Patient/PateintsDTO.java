@@ -1,15 +1,15 @@
-package com.HealthApp.HealthApp;
+package com.HealthApp.HealthApp.Patient;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class providerDTO {
+public class PateintsDTO {
     private  String firstName;
     private  String lastName;
     private  String dateOfBirth;
     private  String email;
     private  String mobilePhone;
-    private  String title;
+
 }

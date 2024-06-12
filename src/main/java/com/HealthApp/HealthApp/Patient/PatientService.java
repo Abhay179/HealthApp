@@ -1,6 +1,5 @@
 package com.HealthApp.HealthApp.Patient;
 
-import com.HealthApp.HealthApp.PateintsDTO;
 import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,8 @@ public class PatientService {
         return repo.findAll();
     }
 
-    public PatientEntity getById(ObjectId id){
-        return  repo.findById(id).orElseThrow(()->new RuntimeException("USER DOES NOT EXIST"+id));
+    public PatientEntity getById(String id){
+        return  repo.findById(id).orElse(null);
     }
 
     public Boolean createPatient(PateintsDTO data){
@@ -38,7 +37,7 @@ public class PatientService {
         return true;
     }
 
-    public boolean deleteById(ObjectId id){
+    public boolean deleteById(String id){
         PatientEntity user=repo.findById(id).orElse(null);
         if(user!=null){
             repo.deleteById(id);
@@ -47,7 +46,7 @@ public class PatientService {
         return false;
     }
 
-    public boolean updateById(ObjectId id , PateintsDTO updates){
+    public PatientEntity updateById(String id , PateintsDTO updates){
         PatientEntity old=repo.findById(id).orElseThrow(()->new RuntimeException("USER DOES NOT EXISTS IN DATABASE"+id));
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setSkipNullEnabled(true);
@@ -57,7 +56,7 @@ public class PatientService {
         old.setUpdatedDate(LocalDateTime.now());
         repo.save(old);
 
-        return true;
+        return old;
     }
 
 

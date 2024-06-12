@@ -1,6 +1,5 @@
 package com.HealthApp.HealthApp.Patient;
 
-import com.HealthApp.HealthApp.PateintsDTO;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,20 +19,21 @@ public class PatientController {
     }
 
     @GetMapping("/{ID}")
-    public PatientEntity getById(@PathVariable  ObjectId ID){
+    public PatientEntity getById(@PathVariable String ID){
         return patientService.getById(ID);
     }
 
 
 
     @PutMapping("/{ID}")
-    public boolean update(@PathVariable  ObjectId ID , @RequestBody PateintsDTO data){
-        return patientService.updateById(ID, data);
+    public PatientEntity update(@PathVariable String ID , @RequestBody PateintsDTO data){
+        patientService.updateById(ID, data);
+        return patientService.getById(ID);
     }
 
 
-    @DeleteMapping("/{ID}")
-    public  boolean delete(@PathVariable  ObjectId ID){
+    @DeleteMapping("{ID}")
+    public  boolean delete(@PathVariable  String  ID){
         return patientService.deleteById(ID);
 
     }

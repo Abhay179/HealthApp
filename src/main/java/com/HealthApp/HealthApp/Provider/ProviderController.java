@@ -1,14 +1,11 @@
 package com.HealthApp.HealthApp.Provider;
 
-import com.HealthApp.HealthApp.Patient.PatientEntity;
 import com.HealthApp.HealthApp.Patient.PatientService;
-import com.HealthApp.HealthApp.providerDTO;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/provider")
@@ -25,18 +22,18 @@ public class ProviderController {
         return providerServices.getAll();
     }
     @GetMapping("/{ID}")
-    public ProviderEntity getById(@PathVariable ObjectId ID){
+    public ProviderEntity getById(@PathVariable String ID){
         return providerServices.getById(ID);
     }
 
     @DeleteMapping("/{ID}")
-    public  boolean delete(@PathVariable  ObjectId ID){
+    public  boolean delete(@PathVariable  String ID){
         return providerServices.deleteById(ID);
 
     }
 
     @PutMapping("/{ID}")
-    public ProviderEntity update(@PathVariable  ObjectId ID , @RequestBody providerDTO data){
+    public ProviderEntity update(@PathVariable  String ID , @RequestBody providerDTO data){
         return providerServices.updateById(ID,  data);
     }
 

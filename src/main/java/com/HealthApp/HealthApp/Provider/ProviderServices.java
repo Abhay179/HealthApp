@@ -1,7 +1,5 @@
 package com.HealthApp.HealthApp.Provider;
 
-import com.HealthApp.HealthApp.PateintsDTO;
-import com.HealthApp.HealthApp.providerDTO;
 import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,7 @@ public class ProviderServices {
         return providerRepository.findAll();
     }
 
-    public ProviderEntity getById(ObjectId id){
+    public ProviderEntity getById(String id){
         return  providerRepository.findById(id).orElseThrow(()->new RuntimeException("ID DOES NOT EXISTS"+id));
     }
 
@@ -36,7 +34,7 @@ public class ProviderServices {
         return true;
     }
 //
-    public boolean deleteById(ObjectId id){
+    public boolean deleteById(String id){
         ProviderEntity provider=providerRepository.findById(id).orElse(null);
         if(provider!=null){
             providerRepository.deleteById(id);
@@ -45,7 +43,7 @@ public class ProviderServices {
         return false;
     }
 //
-    public ProviderEntity updateById(ObjectId id , providerDTO updates){
+    public ProviderEntity updateById(String id , providerDTO updates){
         ProviderEntity old=providerRepository.findById(id).orElseThrow(()->new RuntimeException("USER DOES NOT EXISTS IN DATABASE"+id));
 
         ModelMapper mapper=new ModelMapper();
