@@ -12,9 +12,9 @@ import java.util.List;
 public class SurgeryController {
     @Autowired
     private SuregeryServices suregeryServices;
-    @GetMapping("/{patientID}/getSurgerys")
-    public List<SurgeryEntity> getAll(){
-        return suregeryServices.getAll();
+    @GetMapping("/{patientID}/surgery")
+    public List<SurgeryEntity> getAll(@PathVariable String patientID){
+        return suregeryServices.getAll(patientID);
     }
     @GetMapping("{patientID}/Surgery/{SurgeryID}")
     public SurgeryEntity getById(@PathVariable  String patientID ,@PathVariable String SurgeryID){

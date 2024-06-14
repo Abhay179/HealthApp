@@ -1,6 +1,7 @@
 package com.HealthApp.HealthApp.Surgery;
 
 import com.HealthApp.HealthApp.Patient.PatientRepository;
+import com.HealthApp.HealthApp.Patient.PatientService;
 import com.HealthApp.HealthApp.Problem.ProblemEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +15,26 @@ public class SuregeryServices {
         @Autowired
         private SurgeryRepository surgeryRepository;
         @Autowired
-        private PatientRepository patientRepository;
+        private PatientService patientService;
 
-        public List<SurgeryEntity> getAll(){
+        public List<SurgeryEntity> getAll(String pid){
+                if(patientService.getById(pid)==null){
+                    throw  new RuntimeException("USER DOES NOT EXIST");
+                }
                 return surgeryRepository.findAll();
         }
 
-        public SurgeryEntity getById(String Pid , String id){
-            if(!Pid.equals(surgeryRepository.findById(id).orElse(null).getPatient().getId())){
+        public SurgeryEntity getById(String pid , String id){
+            if(!pid.equals(surgeryRepository.findById(id).orElse(null).getPatient().getId())){
                 new RuntimeException("USER DOES NOT EXISTS OR RESTRICTED");
             }
             return surgeryRepository.findById(id).orElse(null);
         }
 
-        public SurgeryEntity create(String Pid , SurgeryDTO data){
+        public SurgeryEntity create(String pid , SurgeryDTO data){
+            if(patientService.getById(pid)==null){
+                throw new RuntimeException("PATIENT DOES NOT EXIST");
+            }
             SurgeryEntity surgery=new SurgeryEntity();
 
             ModelMapper model=new ModelMapper();
@@ -36,35 +43,35 @@ public class SuregeryServices {
 
             surgery.setCreatedDate(LocalDateTime.now());
             surgery.setUpdatedDate(LocalDateTime.now());
-            surgery.setPatient(patientRepository.findById(Pid).orElse(null));
+            surgery.setPatient(patientService.getById(pid));
             surgery.setSurgeryStatus(SurgeryStatus.PENDING);
             surgeryRepository.save(surgery);
             return surgery;
         }
 
-    public SurgeryEntity update(String Pid , String id , SurgeryDTO data){
-        SurgeryEntity old=surgeryRepository.findById(id).orElseThrow(()->new RuntimeException("USER ID DOES NOT EXISTS"+id));
-        if(Pid.equals(old.getPatient().getId())){
+    public SurgeryEntity update(String pid , String id , SurgeryDTO data){
+        SurgeryEntity current=surgeryRepository.findById(id).orElseThrow(()->new RuntimeException("USER OR SURGERY ID DOES NOT EXISTS"+id));
+        if(pid.equals(current.getPatient().getId())){
             ModelMapper model=new ModelMapper();
             model.getConfiguration().setSkipNullEnabled(true);
-            model.map(data,old);
-            old.setUpdatedDate(LocalDateTime.now());
-            surgeryRepository.save(old);
+            model.map(data,current);
+            current.setUpdatedDate(LocalDateTime.now());
+            surgeryRepository.save(current);
         }
         else{
             throw new RuntimeException("USER IS NOT PERMITTED TO UPDATE");
         }
-        return old;
+        return current;
 
     }
 
-    public boolean deleteById(String Pid ,String id){
+    public boolean deleteById(String pid ,String id){
         SurgeryEntity surgery=surgeryRepository.findById(id).orElse(null);
-        if(surgery !=null && (surgery.getPatient().getId()).equals(Pid) ){
+        if(surgery !=null && (surgery.getPatient().getId()).equals(pid) ){
             surgeryRepository.deleteById(id);
             return true;
         }
-        return false;
+        throw new RuntimeException("INVALID CRENDENTIAL OR DEMAND");
     }
 
 

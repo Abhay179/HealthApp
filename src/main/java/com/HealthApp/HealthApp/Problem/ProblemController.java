@@ -11,9 +11,9 @@ public class ProblemController {
     @Autowired
     private ProblemService problemService;
 
-    @GetMapping("/getProblems")
-    public List<?> getall(){
-        return problemService.getAll();
+    @GetMapping("{patient_id}/problems")
+    public List<?> getall(@PathVariable String patient_id){
+        return problemService.getAll(patient_id);
     }
     @GetMapping("/{patientID}/problem/{id}")
     public ProblemEntity getById(@PathVariable String patientID,@PathVariable String id){

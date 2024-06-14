@@ -1,7 +1,6 @@
 package com.HealthApp.HealthApp.Provider;
 
 import com.HealthApp.HealthApp.Patient.PatientService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +32,7 @@ public class ProviderController {
     }
 
     @PutMapping("/{ID}")
-    public ProviderEntity update(@PathVariable  String ID , @RequestBody providerDTO data){
+    public ProviderEntity update(@PathVariable  String ID , @RequestBody ProviderDTO data){
         return providerServices.updateById(ID,  data);
     }
 

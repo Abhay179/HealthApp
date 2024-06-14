@@ -1,6 +1,5 @@
 package com.HealthApp.HealthApp.Provider;
 
-import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class ProviderServices {
         return  providerRepository.findById(id).orElseThrow(()->new RuntimeException("ID DOES NOT EXISTS"+id));
     }
 
-    public Boolean createProvider(providerDTO data){
+    public Boolean createProvider(ProviderDTO data){
         ProviderEntity provider=new ProviderEntity();
         ModelMapper modelMapper=new ModelMapper();
 
@@ -33,6 +32,10 @@ public class ProviderServices {
         providerRepository.save(provider);
         return true;
     }
+
+    public ProviderEntity getByEmail (String email){
+        return providerRepository.findByEmail(email);
+    }
 //
     public boolean deleteById(String id){
         ProviderEntity provider=providerRepository.findById(id).orElse(null);
@@ -43,7 +46,7 @@ public class ProviderServices {
         return false;
     }
 //
-    public ProviderEntity updateById(String id , providerDTO updates){
+    public ProviderEntity updateById(String id , ProviderDTO updates){
         ProviderEntity old=providerRepository.findById(id).orElseThrow(()->new RuntimeException("USER DOES NOT EXISTS IN DATABASE"+id));
 
         ModelMapper mapper=new ModelMapper();

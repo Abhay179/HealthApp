@@ -17,6 +17,7 @@ public class PatientEntity {
     private  String lastName;
     private  String dateOfBirth;
     private  String email;
+    private String password;
     private  String mobilePhone;
     private LocalDateTime updatedDate;
     private  LocalDateTime createdDate;

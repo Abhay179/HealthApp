@@ -1,15 +1,19 @@
-package com.HealthApp.HealthApp.Provider;
+package com.HealthApp.HealthApp.Authentication;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class providerDTO {
+public class UserDTO {
+    private boolean patient;
     private  String firstName;
     private  String lastName;
     private  String dateOfBirth;
     private  String email;
+    private String password;
     private  String mobilePhone;
     private  String title;
+
+
 }

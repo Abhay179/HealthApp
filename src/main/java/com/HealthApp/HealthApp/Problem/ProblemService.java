@@ -16,41 +16,48 @@ public class ProblemService {
     @Autowired
     private PatientService patientService;
 
-    public List<ProblemEntity> getAll(){
+    public List<ProblemEntity> getAll(String pid){
+        if(patientService.getById(pid)==null){
+            throw new RuntimeException("PATIENT DOES NOT EXISTS");
+        }
         return problemRepository.findAll();
     }
 
-    public ProblemEntity getByid(String Pid ,String id){
-        if(!Pid.equals(problemRepository.findById(id).orElse(null).getPatientEntity().getId())){
+    public ProblemEntity getByid(String pid ,String id){
+        if(!pid.equals(problemRepository.findById(id).orElse(null).getPatientEntity().getId())){
             throw new RuntimeException("USER DOES NOT EXISTS  OR RESTRICTED");
         }
         return problemRepository.findById(id).orElse(null);
     }
 
-    public boolean deleteById(String Pid ,String id){
+    public boolean deleteById(String pid ,String id){
         ProblemEntity problem=problemRepository.findById(id).orElse(null);
-        if(problem !=null && (problem.getPatientEntity().getId()).equals(Pid) ){
+        if(problem !=null && (problem.getPatientEntity().getId()).equals(pid) ){
             problemRepository.deleteById(id);
             return true;
         }
-        return false;
+        throw new RuntimeException("INVALID CREDENTIALS OR INVALID DEMAND");
+
     }
-    public ProblemEntity create(String id ,ProblemDTO data){
+    public ProblemEntity create(String pid ,ProblemDTO data){
+        if(patientService.getById(pid)==null){
+            throw new RuntimeException("PATIENT DOES NOT EXIST");
+        }
         ProblemEntity problem=new ProblemEntity();
         ModelMapper modelMapper=new ModelMapper();
         modelMapper.getConfiguration().setSkipNullEnabled(true);
         modelMapper.map(data,problem);
         problem.setProblemStatus(ProblemStatus.PENDING);
-        problem.setPatientEntity(patientService.getById(id));
+        problem.setPatientEntity(patientService.getById(pid));
         problem.setCreatedDate(LocalDateTime.now());
         problem.setUpdatedDate(LocalDateTime.now());
         problemRepository.save(problem);
         return problem;
     }
 
-    public ProblemEntity update(String Pid ,String id , ProblemDTO data){
+    public ProblemEntity update(String pid ,String id , ProblemDTO data){
         ProblemEntity old=problemRepository.findById(id).orElseThrow(()->new RuntimeException("ID DOES NOT EXISTS "+id));
-        if(Pid.equals(old.getPatientEntity().getId())) {
+        if(pid.equals(old.getPatientEntity().getId())) {
             ModelMapper modelMapper = new ModelMapper();
             modelMapper.getConfiguration().setSkipNullEnabled(true);
             modelMapper.map(data, old);

@@ -21,6 +21,10 @@ public class PatientService {
         return  repo.findById(id).orElse(null);
     }
 
+    public PatientEntity findByEmail(String email){
+        return repo.findByEmail(email);
+    }
+
     public Boolean createPatient(PateintsDTO data){
 
         PatientEntity patientEntity = new PatientEntity();

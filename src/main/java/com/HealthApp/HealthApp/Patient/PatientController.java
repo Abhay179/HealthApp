@@ -38,6 +38,11 @@ public class PatientController {
 
     }
 
+//    @GetMapping("{email}")
+//    public PatientEntity findByEmail(String email){
+//        return  patientService.findByEmail(email);
+//    }
+
 
 
 
