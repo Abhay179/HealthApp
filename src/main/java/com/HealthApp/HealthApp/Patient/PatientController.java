@@ -1,6 +1,9 @@
 package com.HealthApp.HealthApp.Patient;
 
-import org.bson.types.ObjectId;
+import com.HealthApp.HealthApp.Authentication.JwtUtils;
+import com.HealthApp.HealthApp.Authority.CheckToken;
+import com.HealthApp.HealthApp.Authority.IdCheck;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +14,18 @@ import java.util.List;
 public class PatientController {
     @Autowired
     private PatientService patientService;
+    @Autowired
+    JwtUtils jwtUtils;
 
 
     @GetMapping
-    public List<PatientEntity> getAll(){
+    @CheckToken
+    public List<PatientEntity> getAll(HttpServletRequest request){
         return patientService.getAll();
     }
 
     @GetMapping("/{ID}")
+    @IdCheck
     public PatientEntity getById(@PathVariable String ID){
         return patientService.getById(ID);
     }
@@ -26,6 +33,7 @@ public class PatientController {
 
 
     @PutMapping("/{ID}")
+    @IdCheck
     public PatientEntity update(@PathVariable String ID , @RequestBody PateintsDTO data){
         patientService.updateById(ID, data);
         return patientService.getById(ID);
@@ -33,15 +41,12 @@ public class PatientController {
 
 
     @DeleteMapping("{ID}")
+    @IdCheck
     public  boolean delete(@PathVariable  String  ID){
         return patientService.deleteById(ID);
 
     }
 
-//    @GetMapping("{email}")
-//    public PatientEntity findByEmail(String email){
-//        return  patientService.findByEmail(email);
-//    }
 
 
 

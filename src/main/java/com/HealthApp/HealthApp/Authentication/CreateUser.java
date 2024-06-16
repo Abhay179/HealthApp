@@ -61,13 +61,13 @@ public class CreateUser {
         return true;
     }
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserDTO data){
+    public ResponseEntity<?> login(@RequestBody LoginDTO data){
         try {
             authenticationManager.authenticate (
                     new UsernamePasswordAuthenticationToken(data.getEmail(), data.getPassword()));
 //          UserDetails is the inbuild Interface
             UserDetails user = userDetailConfiguration.loadUserByUsername(data.getEmail());
-            String jwt = jwtUtils.generateToken(user.getUsername());
+            String jwt = jwtUtils.generateToken(user.getUsername() ,data);
             System.out.println("******************************"+jwt);
             return new ResponseEntity<>(jwt, HttpStatus.OK);
         } catch (Exception e) {

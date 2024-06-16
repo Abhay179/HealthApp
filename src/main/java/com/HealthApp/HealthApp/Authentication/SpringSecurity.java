@@ -24,11 +24,11 @@ public class SpringSecurity {
     @Autowired
     private UserDetailConfiguration userDetailConfiguration;
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(request -> request
-                .requestMatchers("/patient/**","/provider/**","/login").authenticated()
-
+                .requestMatchers("/patient/**","/provider/**").authenticated()
                 .anyRequest().permitAll())
                 .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
