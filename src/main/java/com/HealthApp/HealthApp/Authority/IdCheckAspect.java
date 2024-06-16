@@ -44,8 +44,10 @@ public class IdCheckAspect {
             throw new RuntimeException("Credentials are invalid or access is not allowed");
         }
 
-        if(!ID.equals(patientRepository.findByEmail(jwtUtils.extractEmail(token)).getId())){
-            throw new RuntimeException("ACCES DENIED WITH THIS USERID");
+        if(jwtUtils.extractType(token).toLowerCase().equals("patient")){
+            if (!ID.equals(patientRepository.findByEmail(jwtUtils.extractEmail(token)).getId())) {
+                throw new RuntimeException("ACCES DENIED WITH THIS USERID");
+            }
         }
 
 
