@@ -34,5 +34,9 @@ public class ProblemController {
     public ProblemEntity update(@PathVariable String patientID, @PathVariable String problemID , @RequestBody ProblemDTO data){
         return problemService.update(patientID, problemID,data);
     }
+    @PutMapping("{providerID}/problem/{problemID}")
+    public ProblemEntity updateStatus(@PathVariable String providerID, @PathVariable String problemID , @RequestBody ProblemDTO data){
+        return problemService.updateStatus(providerID, problemID,data);
+    }
 
 }

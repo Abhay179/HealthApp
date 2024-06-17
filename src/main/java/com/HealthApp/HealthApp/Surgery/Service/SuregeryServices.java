@@ -1,6 +1,7 @@
 package com.HealthApp.HealthApp.Surgery.Service;
 
 import com.HealthApp.HealthApp.Patient.Service.PatientService;
+import com.HealthApp.HealthApp.Provider.ProviderRepository;
 import com.HealthApp.HealthApp.Surgery.Data.SurgeryDTO;
 import com.HealthApp.HealthApp.Surgery.Data.SurgeryEntity;
 import com.HealthApp.HealthApp.Surgery.SurgeryRepository;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @Service
 public class SuregeryServices {
+    @Autowired
+    ProviderRepository providerRepository;
         @Autowired
         private SurgeryRepository surgeryRepository;
         @Autowired
@@ -77,4 +80,18 @@ public class SuregeryServices {
     }
 
 
+    public SurgeryEntity updateStatus(String providerID, String surgeryID, SurgeryDTO data) {
+        if(providerRepository.findById(providerID).orElse(null)==null){
+            throw new RuntimeException("NO PROVIDER EXITS WITH THIS USER ID");
+        }
+        SurgeryEntity current=surgeryRepository.findById(surgeryID).orElseThrow(()->new RuntimeException("USER OR SURGERY ID DOES NOT EXISTS"+surgeryID));
+        ModelMapper model=new ModelMapper();
+        model.getConfiguration().setSkipNullEnabled(true);
+        model.map(data,current);
+        current.setUpdatedDate(LocalDateTime.now());
+        surgeryRepository.save(current);
+
+
+        return current;
+    }
 }

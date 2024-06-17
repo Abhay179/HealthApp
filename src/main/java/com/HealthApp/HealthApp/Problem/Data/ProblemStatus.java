@@ -2,5 +2,9 @@ package com.HealthApp.HealthApp.Problem.Data;
 
 public enum ProblemStatus {
     ACTIVE,
-    PENDING
+    PENDING,
+    active,
+    pending,
+    Pending,
+    Active
 }

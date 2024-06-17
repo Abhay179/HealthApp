@@ -33,5 +33,9 @@ public class SurgeryController {
     public SurgeryEntity update(@PathVariable String patientID, @PathVariable String surgeryID , @RequestBody SurgeryDTO data){
         return suregeryServices.update(patientID, surgeryID,data);
     }
+    @PutMapping("{providerID}/surgery/{surgeryID}")
+    public SurgeryEntity updateStatus(@PathVariable String providerID, @PathVariable String surgeryID , @RequestBody SurgeryDTO data){
+        return suregeryServices.updateStatus(providerID, surgeryID,data);
+    }
 
 }

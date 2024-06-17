@@ -5,6 +5,7 @@ import com.HealthApp.HealthApp.Problem.Data.ProblemDTO;
 import com.HealthApp.HealthApp.Problem.Data.ProblemEntity;
 import com.HealthApp.HealthApp.Problem.Data.ProblemStatus;
 import com.HealthApp.HealthApp.Problem.ProblemRepository;
+import com.HealthApp.HealthApp.Provider.Service.ProviderServices;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class ProblemService {
     private ProblemRepository problemRepository;
     @Autowired
     private PatientService patientService;
+    @Autowired
+    private ProviderServices providerServices;
 
     public List<ProblemEntity> getAll(String pid){
         if(patientService.getById(pid)==null){
@@ -65,6 +68,7 @@ public class ProblemService {
             modelMapper.getConfiguration().setSkipNullEnabled(true);
             modelMapper.map(data, old);
             old.setUpdatedDate(LocalDateTime.now());
+            old.setProblemStatus(ProblemStatus.PENDING);
             problemRepository.save(old);
 
         }
@@ -73,4 +77,22 @@ public class ProblemService {
         }
         return old;
     }
+
+    public ProblemEntity updateStatus(String pid ,String id , ProblemDTO data){
+        if(providerServices.getById(pid)==null){
+            throw new RuntimeException("PROVIDER DOES NOT EXISTS");
+        }
+        ProblemEntity old=problemRepository.findById(id).orElseThrow(()->new RuntimeException("ID DOES NOT EXISTS "+id));
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration().setSkipNullEnabled(true);
+
+        modelMapper.map(data,old);
+        old.setUpdatedDate(LocalDateTime.now());
+        problemRepository.save(old);
+
+        return old;
+    }
+
+
 }
