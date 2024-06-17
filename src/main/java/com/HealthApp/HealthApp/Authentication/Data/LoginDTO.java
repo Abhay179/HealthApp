@@ -1,4 +1,4 @@
-package com.HealthApp.HealthApp.Authentication;
+package com.HealthApp.HealthApp.Authentication.Data;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

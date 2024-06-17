@@ -1,4 +1,4 @@
-package com.HealthApp.HealthApp.Surgery;
+package com.HealthApp.HealthApp.Surgery.Data;
 
 public enum  SurgeryStatus {
     ACTIVE,

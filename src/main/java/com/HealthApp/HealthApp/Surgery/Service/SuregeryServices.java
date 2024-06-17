@@ -1,8 +1,10 @@
-package com.HealthApp.HealthApp.Surgery;
+package com.HealthApp.HealthApp.Surgery.Service;
 
-import com.HealthApp.HealthApp.Patient.PatientRepository;
-import com.HealthApp.HealthApp.Patient.PatientService;
-import com.HealthApp.HealthApp.Problem.ProblemEntity;
+import com.HealthApp.HealthApp.Patient.Service.PatientService;
+import com.HealthApp.HealthApp.Surgery.Data.SurgeryDTO;
+import com.HealthApp.HealthApp.Surgery.Data.SurgeryEntity;
+import com.HealthApp.HealthApp.Surgery.SurgeryRepository;
+import com.HealthApp.HealthApp.Surgery.Data.SurgeryStatus;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

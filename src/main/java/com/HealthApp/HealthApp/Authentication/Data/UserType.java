@@ -1,4 +1,4 @@
-package com.HealthApp.HealthApp.Authentication;
+package com.HealthApp.HealthApp.Authentication.Data;
 
 public enum UserType {
     patient,

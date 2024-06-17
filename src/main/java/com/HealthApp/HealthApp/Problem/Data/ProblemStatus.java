@@ -1,4 +1,4 @@
-package com.HealthApp.HealthApp.Problem;
+package com.HealthApp.HealthApp.Problem.Data;
 
 public enum ProblemStatus {
     ACTIVE,

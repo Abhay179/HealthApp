@@ -1,8 +1,10 @@
 package com.HealthApp.HealthApp.Patient;
 
-import com.HealthApp.HealthApp.Authentication.JwtUtils;
-import com.HealthApp.HealthApp.Authority.CheckToken;
-import com.HealthApp.HealthApp.Authority.IdCheck;
+import com.HealthApp.HealthApp.Authority.IsProvider;
+import com.HealthApp.HealthApp.Authority.SelfOrProvider;
+import com.HealthApp.HealthApp.Patient.Data.PateintsDTO;
+import com.HealthApp.HealthApp.Patient.Data.PatientEntity;
+import com.HealthApp.HealthApp.Patient.Service.PatientService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,41 +16,36 @@ import java.util.List;
 public class PatientController {
     @Autowired
     private PatientService patientService;
-    @Autowired
-    JwtUtils jwtUtils;
+
 
 
     @GetMapping
-    @CheckToken
+    @IsProvider
     public List<PatientEntity> getAll(HttpServletRequest request){
         return patientService.getAll();
     }
 
-    @GetMapping("/{ID}")
-    @IdCheck
-    public PatientEntity getById(@PathVariable String ID){
-        return patientService.getById(ID);
+    @GetMapping("/{patientID}")
+    @SelfOrProvider
+    public PatientEntity getById(@PathVariable String patientID){
+        return patientService.getById(patientID);
     }
 
 
 
-    @PutMapping("/{ID}")
-    @IdCheck
-    public PatientEntity update(@PathVariable String ID , @RequestBody PateintsDTO data){
-        patientService.updateById(ID, data);
-        return patientService.getById(ID);
+    @PutMapping("/{patientID}")
+    @SelfOrProvider
+    public PatientEntity update(HttpServletRequest request ,@PathVariable String patientID , @RequestBody PateintsDTO data){
+
+        patientService.updateById(request,patientID, data);
+        return patientService.getById(patientID);
     }
 
 
-    @DeleteMapping("{ID}")
-    @IdCheck
+    @DeleteMapping("/{patientID}")
+    @SelfOrProvider
     public  boolean delete(@PathVariable  String  ID){
         return patientService.deleteById(ID);
 
     }
-
-
-
-
-
 }

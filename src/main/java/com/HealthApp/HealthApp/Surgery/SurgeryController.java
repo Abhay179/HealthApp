@@ -1,7 +1,8 @@
 package com.HealthApp.HealthApp.Surgery;
 
-import com.HealthApp.HealthApp.Problem.ProblemDTO;
-import com.HealthApp.HealthApp.Problem.ProblemEntity;
+import com.HealthApp.HealthApp.Surgery.Data.SurgeryDTO;
+import com.HealthApp.HealthApp.Surgery.Data.SurgeryEntity;
+import com.HealthApp.HealthApp.Surgery.Service.SuregeryServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

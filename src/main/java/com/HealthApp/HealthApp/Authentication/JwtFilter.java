@@ -1,5 +1,6 @@
 package com.HealthApp.HealthApp.Authentication;
 
+import com.HealthApp.HealthApp.Authentication.Utils.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

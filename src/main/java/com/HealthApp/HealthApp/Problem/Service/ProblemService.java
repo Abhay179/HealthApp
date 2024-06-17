@@ -1,7 +1,10 @@
-package com.HealthApp.HealthApp.Problem;
+package com.HealthApp.HealthApp.Problem.Service;
 
-import com.HealthApp.HealthApp.Patient.PatientEntity;
-import com.HealthApp.HealthApp.Patient.PatientService;
+import com.HealthApp.HealthApp.Patient.Service.PatientService;
+import com.HealthApp.HealthApp.Problem.Data.ProblemDTO;
+import com.HealthApp.HealthApp.Problem.Data.ProblemEntity;
+import com.HealthApp.HealthApp.Problem.Data.ProblemStatus;
+import com.HealthApp.HealthApp.Problem.ProblemRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +42,7 @@ public class ProblemService {
         throw new RuntimeException("INVALID CREDENTIALS OR INVALID DEMAND");
 
     }
-    public ProblemEntity create(String pid ,ProblemDTO data){
+    public ProblemEntity create(String pid , ProblemDTO data){
         if(patientService.getById(pid)==null){
             throw new RuntimeException("PATIENT DOES NOT EXIST");
         }

@@ -1,5 +1,8 @@
 package com.HealthApp.HealthApp.Problem;
 
+import com.HealthApp.HealthApp.Problem.Data.ProblemDTO;
+import com.HealthApp.HealthApp.Problem.Data.ProblemEntity;
+import com.HealthApp.HealthApp.Problem.Service.ProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +19,7 @@ public class ProblemController {
         return problemService.getAll(patient_id);
     }
     @GetMapping("/{patientID}/problem/{id}")
-    public ProblemEntity getById(@PathVariable String patientID,@PathVariable String id){
+    public ProblemEntity getById(@PathVariable String patientID, @PathVariable String id){
         return problemService.getByid(patientID , id);
     }
     @PostMapping("{patientID}/problem/create")

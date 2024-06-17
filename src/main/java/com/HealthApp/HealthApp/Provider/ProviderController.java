@@ -1,6 +1,9 @@
 package com.HealthApp.HealthApp.Provider;
 
-import com.HealthApp.HealthApp.Patient.PatientService;
+import com.HealthApp.HealthApp.Patient.Service.PatientService;
+import com.HealthApp.HealthApp.Provider.Data.ProviderDTO;
+import com.HealthApp.HealthApp.Provider.Data.ProviderEntity;
+import com.HealthApp.HealthApp.Provider.Service.ProviderServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

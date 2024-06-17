@@ -1,6 +1,9 @@
-package com.HealthApp.HealthApp.Patient;
+package com.HealthApp.HealthApp.Patient.Service;
 
-import org.bson.types.ObjectId;
+import com.HealthApp.HealthApp.Patient.Data.PateintsDTO;
+import com.HealthApp.HealthApp.Patient.Data.PatientEntity;
+import com.HealthApp.HealthApp.Patient.PatientRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +53,9 @@ public class PatientService {
         return false;
     }
 
-    public PatientEntity updateById(String id , PateintsDTO updates){
+    public PatientEntity updateById(HttpServletRequest request,String id , PateintsDTO updates){
+        String type= (String) request.getAttribute("userType");
+        System.out.println("***************"+type);
         PatientEntity old=repo.findById(id).orElseThrow(()->new RuntimeException("USER DOES NOT EXISTS IN DATABASE"+id));
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setSkipNullEnabled(true);

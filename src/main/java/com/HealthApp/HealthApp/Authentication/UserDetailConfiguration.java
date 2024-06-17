@@ -1,10 +1,8 @@
 package com.HealthApp.HealthApp.Authentication;
 
-import com.HealthApp.HealthApp.Patient.PatientEntity;
+import com.HealthApp.HealthApp.Patient.Data.PatientEntity;
 import com.HealthApp.HealthApp.Patient.PatientRepository;
-import com.HealthApp.HealthApp.Patient.PatientService;
-import com.HealthApp.HealthApp.Problem.ProblemService;
-import com.HealthApp.HealthApp.Provider.ProviderEntity;
+import com.HealthApp.HealthApp.Provider.Data.ProviderEntity;
 import com.HealthApp.HealthApp.Provider.ProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

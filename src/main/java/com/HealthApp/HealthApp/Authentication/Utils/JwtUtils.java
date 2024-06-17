@@ -1,4 +1,5 @@
-package com.HealthApp.HealthApp.Authentication;
+package com.HealthApp.HealthApp.Authentication.Utils;
+import com.HealthApp.HealthApp.Authentication.Data.LoginDTO;
 import com.HealthApp.HealthApp.Patient.PatientRepository;
 import com.HealthApp.HealthApp.Provider.ProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,11 +8,9 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.crypto.SecretKey;
 import java.util.*;
-import java.util.function.Function;
 
 @Component
 @Configuration
@@ -65,7 +64,7 @@ public class JwtUtils {
                 .header().empty().add("typ","JWT")
                 .and()
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 )) // 5 minutes expiration time
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 *5 )) // 5 minutes expiration time
                 .signWith(getSigningKey())
                 .compact();
     }

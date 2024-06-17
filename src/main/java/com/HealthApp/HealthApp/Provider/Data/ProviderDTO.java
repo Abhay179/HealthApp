@@ -1,4 +1,4 @@
-package com.HealthApp.HealthApp.Provider;
+package com.HealthApp.HealthApp.Provider.Data;
 
 import lombok.Getter;
 import lombok.Setter;

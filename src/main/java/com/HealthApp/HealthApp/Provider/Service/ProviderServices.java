@@ -1,5 +1,8 @@
-package com.HealthApp.HealthApp.Provider;
+package com.HealthApp.HealthApp.Provider.Service;
 
+import com.HealthApp.HealthApp.Provider.Data.ProviderDTO;
+import com.HealthApp.HealthApp.Provider.Data.ProviderEntity;
+import com.HealthApp.HealthApp.Provider.ProviderRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

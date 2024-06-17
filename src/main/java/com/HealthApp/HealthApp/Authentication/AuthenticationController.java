@@ -1,18 +1,18 @@
 package com.HealthApp.HealthApp.Authentication;
 
-import com.HealthApp.HealthApp.Patient.PateintsDTO;
-import com.HealthApp.HealthApp.Patient.PatientService;
-import com.HealthApp.HealthApp.Problem.ProblemDTO;
-import com.HealthApp.HealthApp.Provider.ProviderDTO;
-import com.HealthApp.HealthApp.Provider.ProviderServices;
+import com.HealthApp.HealthApp.Authentication.Data.LoginDTO;
+import com.HealthApp.HealthApp.Authentication.Data.UserDTO;
+import com.HealthApp.HealthApp.Authentication.Utils.JwtUtils;
+import com.HealthApp.HealthApp.Patient.Data.PateintsDTO;
+import com.HealthApp.HealthApp.Patient.Service.PatientService;
+import com.HealthApp.HealthApp.Provider.Data.ProviderDTO;
+import com.HealthApp.HealthApp.Provider.Service.ProviderServices;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping()
-public class CreateUser {
+public class AuthenticationController {
 
     private static final PasswordEncoder passwardEncoder=new BCryptPasswordEncoder();
     @Autowired
