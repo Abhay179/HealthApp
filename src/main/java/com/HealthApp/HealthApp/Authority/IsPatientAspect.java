@@ -1,8 +1,7 @@
 package com.HealthApp.HealthApp.Authority;
 
-import com.HealthApp.HealthApp.Authentication.Utils.JwtUtils;
+import com.HealthApp.HealthApp.Utils.JwtUtils;
 import com.HealthApp.HealthApp.Patient.PatientRepository;
-import com.HealthApp.HealthApp.Provider.ProviderRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

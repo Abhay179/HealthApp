@@ -2,7 +2,7 @@ package com.HealthApp.HealthApp.Authentication;
 
 import com.HealthApp.HealthApp.Authentication.Data.LoginDTO;
 import com.HealthApp.HealthApp.Authentication.Data.UserDTO;
-import com.HealthApp.HealthApp.Authentication.Utils.JwtUtils;
+import com.HealthApp.HealthApp.Utils.JwtUtils;
 import com.HealthApp.HealthApp.Patient.Data.PateintsDTO;
 import com.HealthApp.HealthApp.Patient.Service.PatientService;
 import com.HealthApp.HealthApp.Provider.Data.ProviderDTO;
@@ -43,13 +43,14 @@ public class AuthenticationController {
         data.setPassword(passwardEncoder.encode(data.getPassword()));
         ModelMapper model=new ModelMapper();
         model.getConfiguration().setSkipNullEnabled(true);
-        if(data.isPatient()==true){
+        String type=data.getType().toString();
+        if(type.toLowerCase().equals("patient")){
             data.setTitle(null);
             PateintsDTO patient=new PateintsDTO();
             model.map(data,patient);
             patientService.createPatient(patient);
         }
-        else if (data.isPatient()==false){
+        else if (type.toLowerCase().equals("provider")){
             ProviderDTO provider=new ProviderDTO();
             model.map(data,provider);
             providerServices.createProvider(provider);

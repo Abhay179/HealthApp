@@ -1,4 +1,4 @@
-package com.HealthApp.HealthApp.Authentication.Utils;
+package com.HealthApp.HealthApp.Utils;
 import com.HealthApp.HealthApp.Authentication.Data.LoginDTO;
 import com.HealthApp.HealthApp.Patient.PatientRepository;
 import com.HealthApp.HealthApp.Provider.ProviderRepository;
